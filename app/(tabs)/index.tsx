@@ -8,8 +8,19 @@ import {
   useTheme,
   Searchbar,
   Chip,
+  Icon,
 } from 'react-native-paper';
-import { Package, MapPin, Clock, User, Star } from 'lucide-react-native';
+import {
+  Package,
+  MapPin,
+  Clock,
+  User,
+  Star,
+  ArrowLeft,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react-native';
 import { useState } from 'react';
 
 export default function PublicFeed() {
@@ -102,31 +113,38 @@ export default function PublicFeed() {
           style={styles.searchBar}
         />
       </View>
-
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.categoriesContainer}
-      >
-        {categories.map((category) => (
-          <Chip
-            key={category.id}
-            selected={selectedCategory === category.id}
-            onPress={() => setSelectedCategory(category.id)}
-            style={[
-              styles.categoryChip,
-              selectedCategory === category.id && {
-                backgroundColor: theme.colors.primary,
-              },
-            ]}
-            textStyle={
-              selectedCategory === category.id ? { color: 'white' } : {}
-            }
-          >
-            {category.label}
-          </Chip>
-        ))}
-      </ScrollView>
+      <View style={styles.categoriesView}>
+        <View style={styles.leftIconContainer}>
+          <ChevronLeft style={styles.leftIcon} />
+        </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.categoriesContainer}
+        >
+          {categories.map((category) => (
+            <Chip
+              key={category.id}
+              selected={selectedCategory === category.id}
+              onPress={() => setSelectedCategory(category.id)}
+              style={[
+                styles.categoryChip,
+                selectedCategory === category.id && {
+                  backgroundColor: theme.colors.primary,
+                },
+              ]}
+              textStyle={
+                selectedCategory === category.id ? { color: 'white' } : {}
+              }
+            >
+              {category.label}
+            </Chip>
+          ))}
+        </ScrollView>
+        <View style={styles.rightIconContainer}>
+          <ChevronRight style={styles.rightIcon} />
+        </View>
+      </View>
 
       <View style={styles.packagesContainer}>
         {filteredPackages.map((pkg) => (
@@ -195,6 +213,19 @@ export default function PublicFeed() {
 }
 
 const styles = StyleSheet.create({
+  leftIconContainer: {
+    marginRight: 2,
+  },
+  rightIconContainer: {
+    marginLeft: 2,
+  },
+  leftIcon: {
+    top: 0,
+    marginLeft: 0,
+  },
+  rightIcon: {
+    marginRight: 0,
+  },
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
@@ -222,13 +253,27 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   categoriesContainer: {
-    paddingHorizontal: 16,
+    backgroundColor: '#F5F5F5',
+    paddingHorizontal: 6,
     marginBottom: 16,
   },
   categoryChip: {
     marginRight: 8,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: '#FFFFFF',
   },
+  categoriesView: {
+    margin: 1,
+
+    paddingVertical: 7.5,
+    paddingHorizontal: 8,
+    backgroundColor: '#F5F5F5',
+    borderWidth: 0,
+    elevation: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
   packagesContainer: {
     padding: 16,
     paddingTop: 0,

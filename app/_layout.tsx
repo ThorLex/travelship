@@ -31,6 +31,12 @@ function RootLayoutNav() {
     <Stack
       screenOptions={{
         headerShown: false,
+        gestureEnabled: true,
+        animation: 'fade',
+        animationDuration: 300,
+        animationTypeForReplace: 'push',
+
+        gestureDirection: 'horizontal',
       }}
     >
       <Stack.Screen
