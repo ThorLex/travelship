@@ -1,6 +1,14 @@
 import React from 'react';
 import { ScrollView, View, StyleSheet } from 'react-native';
-import { Card, Title, Text, Surface, useTheme, Searchbar, Chip } from 'react-native-paper';
+import {
+  Card,
+  Title,
+  Text,
+  Surface,
+  useTheme,
+  Searchbar,
+  Chip,
+} from 'react-native-paper';
 import { Package, MapPin, Clock, User, Star } from 'lucide-react-native';
 import { useState } from 'react';
 
@@ -18,7 +26,7 @@ export default function PublicFeed() {
   ];
 
   const publicPackages = [
-    { 
+    {
       id: 'PKG001',
       title: 'iPhone 13 Pro Max',
       description: 'Excellent état, avec boîte et accessoires',
@@ -30,9 +38,9 @@ export default function PublicFeed() {
       sender: 'Sophie Martin',
       rating: 4.8,
       weight: '0.5kg',
-      status: 'Disponible'
+      status: 'Disponible',
     },
-    { 
+    {
       id: 'PKG002',
       title: 'Table basse en bois',
       description: 'Table vintage en excellent état',
@@ -44,9 +52,9 @@ export default function PublicFeed() {
       sender: 'Lucas Dubois',
       rating: 4.9,
       weight: '15kg',
-      status: 'Réservé'
+      status: 'Réservé',
     },
-    { 
+    {
       id: 'PKG003',
       title: 'Collection de livres',
       description: '20 romans français contemporains',
@@ -58,18 +66,20 @@ export default function PublicFeed() {
       sender: 'Marie Claire',
       rating: 4.7,
       weight: '3kg',
-      status: 'Disponible'
+      status: 'Disponible',
     },
   ];
 
-  const filteredPackages = publicPackages.filter(pkg => {
-    const matchesSearch = pkg.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         pkg.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         pkg.from.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         pkg.to.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesCategory = selectedCategory === 'all' || pkg.category === selectedCategory;
-    
+  const filteredPackages = publicPackages.filter((pkg) => {
+    const matchesSearch =
+      pkg.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      pkg.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      pkg.from.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      pkg.to.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesCategory =
+      selectedCategory === 'all' || pkg.category === selectedCategory;
+
     return matchesSearch && matchesCategory;
   });
 
@@ -93,7 +103,11 @@ export default function PublicFeed() {
         />
       </View>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoriesContainer}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.categoriesContainer}
+      >
         {categories.map((category) => (
           <Chip
             key={category.id}
@@ -101,9 +115,13 @@ export default function PublicFeed() {
             onPress={() => setSelectedCategory(category.id)}
             style={[
               styles.categoryChip,
-              selectedCategory === category.id && { backgroundColor: theme.colors.primary }
+              selectedCategory === category.id && {
+                backgroundColor: theme.colors.primary,
+              },
             ]}
-            textStyle={selectedCategory === category.id ? { color: 'white' } : {}}
+            textStyle={
+              selectedCategory === category.id ? { color: 'white' } : {}
+            }
           >
             {category.label}
           </Chip>
@@ -127,11 +145,19 @@ export default function PublicFeed() {
                   </Text>
                   <Chip
                     mode="flat"
+                    onPress={() => setSelectedCategory('1')}
                     style={[
                       styles.statusChip,
-                      { backgroundColor: pkg.status === 'Disponible' ? '#4CAF50' : '#FF9800' }
+                      {
+                        backgroundColor:
+                          pkg.status === 'Disponible' ? '#4CAF50' : '#FF9800',
+                      },
                     ]}
-                    textStyle={{ color: 'white', fontSize: 10 }}
+                    textStyle={{
+                      color: 'white',
+                      fontWeight: 'bold',
+                      fontSize: 12,
+                    }}
                   >
                     {pkg.status}
                   </Chip>
@@ -141,7 +167,9 @@ export default function PublicFeed() {
               <View style={styles.routeContainer}>
                 <View style={styles.route}>
                   <MapPin size={16} color="#757575" />
-                  <Text style={styles.routeText}>{pkg.from} → {pkg.to}</Text>
+                  <Text style={styles.routeText}>
+                    {pkg.from} → {pkg.to}
+                  </Text>
                 </View>
                 <View style={styles.packageDetails}>
                   <Text style={styles.weight}>{pkg.weight}</Text>
@@ -190,7 +218,8 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     backgroundColor: '#FFFFFF',
-    elevation: 2,
+    elevation: 1,
+    borderRadius: 8,
   },
   categoriesContainer: {
     paddingHorizontal: 16,
@@ -238,7 +267,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   statusChip: {
-    height: 24,
+    height: 34,
   },
   routeContainer: {
     flexDirection: 'row',

@@ -6,7 +6,7 @@ import {
   User,
   MessageCircle,
   CreditCard,
-  Chrome as Home,
+  HomeIcon,
 } from 'lucide-react-native';
 
 export default function TabLayout() {
@@ -30,7 +30,9 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Accueil',
-          tabBarIcon: ({ size, color }) => <Home size={size} color={color} />,
+          tabBarIcon: ({ size, color }) => (
+            <HomeIcon size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
